@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Testy Naprawojazdy EU, Szybka Nawigacja
+// @name         PrawkoNavi
 // @namespace    http://tampermonkey.net/
 // @version      0.3
-// @description  Skrypt pozwala na sprawne poruszanie się, ćwicząc na stronie testynaprawojazdy.eu
+// @description  Skrypt pozwala na sprawne poruszanie się za pomocą klawiszy, ćwicząc na stronie testynaprawojazdy.eu
 // @author       Warvdoh Mróz, https://github.com/Warvdoh
 // @match        https://www.testynaprawojazdy.eu/exam/exam/*
 // @grant        none
@@ -80,3 +80,5 @@
         window.addEventListener('keydown', disableArrowScroll, { passive: false });
     };
 })();
+//Jeśli uważasz, że przydał ci się skrypcik to postaw mi kawę :D o, tutaj --> https://buymeacoffee.com/warvdoh
+//Ten skrypt obowiązuje licencja GNU General Public License v3.0 - więcej informacji na https://www.gnu.org/licenses/gpl-3.0.html
