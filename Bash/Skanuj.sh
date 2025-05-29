@@ -127,3 +127,4 @@ echo -e "${YELLOW}Logs and copied files are in:${NC} $TMPDIR"
 # === Optional Unmount ===
 read -rp "Do you want to unmount the drive? (y/N): " UMNT
 [[ "$UMNT" =~ ^[Yy]$ ]] && sudo umount "$MOUNT_POINT" && echo -e "${GREEN}[OK] Drive unmounted.${NC}"
+# Licensed under Warvdoh's Personal Use License (WPUL) Version 1.1 Copyright (c) 2025 Warvdoh Mróz. https://warvdoh.github.io/Assets/LICENSE.md
