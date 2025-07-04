@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+VERSION="v1.1"
 
 # === Color Definitions ===
 RED='\033[0;31m'
@@ -33,7 +34,7 @@ if [[ "${BASH_SOURCE[0]}" != "$TARGET" ]]; then
 fi
 
 # === Header UI ===
-echo -e "${YELLOW}[INFO] Running dscan-x v1.3 by Warvdoh${NC}"
+echo -e "${YELLOW}[INFO] Running dscan-x ${VERSION} by Warvdoh${NC}"
 echo "──────────────────────────────────────────────"
 
 # === Setup Temp Directory ===
