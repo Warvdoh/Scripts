@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 # === Color Definitions ===
 RED='\033[0;31m'
@@ -6,6 +7,34 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
+
+# === Bootstrap Install Snippet ===
+USER_HOME="/home/$USER"
+TARGET="$USER_HOME/dscan-x.sh"
+BASHRC="$USER_HOME/.bashrc"
+
+if [[ "${BASH_SOURCE[0]}" != "$TARGET" ]]; then
+    if [[ ! -f "$TARGET" ]]; then
+        echo -e "${YELLOW}[INFO] Installing dscan-x to $TARGET${NC}"
+        cp "${BASH_SOURCE[0]}" "$TARGET"
+        chmod +x "$TARGET"
+    fi
+    if ! grep -qxF "# added by dscan-x" "$BASHRC" \
+        || ! grep -qxF "alias dscan=\"$TARGET\"" "$BASHRC"; then
+        echo -e "${YELLOW}[INFO] Adding alias to $BASHRC${NC}"
+        {
+            echo ""
+            echo "# added by dscan-x"
+            echo "alias dscan=\"$TARGET\""
+        } >> "$BASHRC"
+    fi
+    echo -e "${YELLOW}[INFO] Reload your shell or run 'source ~/.bashrc' to use 'dscan'${NC}"
+    exit 0
+fi
+
+# === Header UI ===
+echo -e "${YELLOW}[INFO] Running dscan-x v1.3 by Warvdoh${NC}"
+echo "──────────────────────────────────────────────"
 
 # === Setup Temp Directory ===
 TMPDIR="/tmp/safe_recovery"
@@ -60,7 +89,6 @@ MOUNT_POINT="$TMPDIR/mnt_$(basename "$DEVICE")"
 mkdir -p "$MOUNT_POINT"
 
 # === Mount Attempt ===
-# Attempt to mount the device
 echo -e "${BLUE}--- Mounting $DEVICE read-only... ---${NC}"
 if ! sudo mount -o ro "$DEVICE" "$MOUNT_POINT" 2>/dev/null; then
     echo -e "${RED}[WARNING] Mount failed. Searching for partitions...${NC}"
@@ -118,8 +146,8 @@ if [[ "$OP" == *C* ]]; then
 fi
 
 # === Wait for Completion ===
-[[ "$SCAN_PID" ]] && wait "$SCAN_PID" && echo -e "${GREEN}[OK] Scan finished.${NC}"
-[[ "$COPY_PID" ]] && wait "$COPY_PID" && echo -e "${GREEN}[OK] Copy finished.${NC}"
+[[ -n "${SCAN_PID-}" ]] && wait "$SCAN_PID" && echo -e "${GREEN}[OK] Scan finished.${NC}"
+[[ -n "${COPY_PID-}" ]] && wait "$COPY_PID" && echo -e "${GREEN}[OK] Copy finished.${NC}"
 
 # === Wrap-up ===
 echo -e "${YELLOW}Logs and copied files are in:${NC} $TMPDIR"
@@ -127,4 +155,6 @@ echo -e "${YELLOW}Logs and copied files are in:${NC} $TMPDIR"
 # === Optional Unmount ===
 read -rp "Do you want to unmount the drive? (y/N): " UMNT
 [[ "$UMNT" =~ ^[Yy]$ ]] && sudo umount "$MOUNT_POINT" && echo -e "${GREEN}[OK] Drive unmounted.${NC}"
-# Licensed under Warvdoh's Personal Use License (WPUL) Version 1.2 Copyright (c) 2025 Warvdoh Mróz. https://warvdoh.github.io/Assets/LICENSE.md
+
+# Licensed under Warvdoh's Personal Use License (WPUL) Version 1.2 © 2025 Warvdoh Mróz  
+# https://warvdoh.github.io/Assets/LICENSE.md
