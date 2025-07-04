@@ -4,6 +4,7 @@ set -euo pipefail
 USER_HOME="/home/$USER"
 TARGET="$USER_HOME/ntest-x.sh"
 BASHRC="$USER_HOME/.bashrc"
+VERSION="v1.1.9"
 
 # ANSI colours
 INFO="\033[1;36m[INFO]\033[0m"
@@ -30,7 +31,7 @@ if [[ "$BASH_SOURCE" != "$TARGET" ]]; then
 fi
 
 # From here on, we're running as ~/ntest-x.sh
-echo -e "${INFO} Running ntest-x v0.1.9 by Warvdoh"
+echo -e "${INFO} Running ntest-x v${VERSION} by Warvdoh"
 echo "──────────────────────────────────────────────"
 
 # The rest is identical to v0.1.9 ping suite:
