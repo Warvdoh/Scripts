@@ -34,7 +34,7 @@ fi
 echo -e "${INFO} Running ntest-x v${VERSION} by Warvdoh"
 echo "──────────────────────────────────────────────"
 
-# The rest is identical to v0.1.9 ping suite:
+# The rest is identical to v0.1.3 ping suite:
 
 OK="\033[1;32m[OK]\033[0m"
 FAIL="\033[1;31m[FAIL]\033[0m"
