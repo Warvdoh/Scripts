@@ -82,3 +82,4 @@
 })();
 //Jeśli uważasz, że przydał ci się skrypcik to postaw mi kawę :D o, tutaj --> https://buymeacoffee.com/warvdoh
 //Ten skrypt obowiązuje licencja GNU General Public License v3.0 - więcej informacji na https://www.gnu.org/licenses/gpl-3.0.html
+//Licencja WPUL NIE dotyczy tego skryptu
